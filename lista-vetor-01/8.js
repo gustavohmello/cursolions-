@@ -1,4 +1,4 @@
-//some apenas os numeros impares 
+//somar apenas os nûmeros impares//
 
 let number = [1, 2, 3, 4, 5, 6, 7, 8];
 let numerosPares = 0;
