@@ -1,4 +1,4 @@
-// inverter um alray em outro (sem reverse)//
+// inverter um array em outro (sem reverse)//
 
 let a = [1, 2, 3, 4, 5];
 let b = [];
