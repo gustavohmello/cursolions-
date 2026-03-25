@@ -1,4 +1,4 @@
-//crie um alray e imprima todos os valores //
+//crie um array e imprima todos os valores //
 
 let number = [2,3,5,1,];
 
