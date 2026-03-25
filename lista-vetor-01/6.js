@@ -1,4 +1,4 @@
-// encontre o menor valor // 
+// encontrar menor valor // 
 
 let number = [1, 2, 3, 4, 5, 6];
 let numeroMenor = number[0];
