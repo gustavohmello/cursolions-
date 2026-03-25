@@ -1,3 +1,5 @@
+// some todos os valores //
+
 let number = [1, 2, 3, 4, 5];
 let media = 0;
 let soma = 0;
