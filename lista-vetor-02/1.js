@@ -1,3 +1,5 @@
+//Dado um array de números, encontre o maior e o segundo maior.//
+
 let numbers = [1, 2, 85, 4, 5,90];
 let numeroMaior = numbers[0];
 let segundoMaior = numbers[0]
