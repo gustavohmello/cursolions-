@@ -35,9 +35,9 @@ function mostrarMenu() {
             removerAluno();
         } else if (opcao === "6") {
             alunosAprovados();
-        }else if (opcao === "7") {
+        } else if (opcao === "7") {
             alunosReprovados();
-        }else if (opcao === "0"){
+        } else if (opcao === "0") {
             sairDoMenu();
 
         }
@@ -46,11 +46,11 @@ function mostrarMenu() {
 }
 
 
-    function alunosReprovados() {
+function alunosReprovados() {
     let alunosReprovados = [];
     console.log("Alunos Reprovados: ");
 
-    if(alunos === null){
+    if (alunos === null) {
         mostrarMenu();
         return;
     }
@@ -70,7 +70,7 @@ function alunosAprovados() {
     let alunosAprovados = [];
     console.log("Alunos aprovados: ");
 
-    if(alunos === null){
+    if (alunos === null) {
         mostrarMenu();
         return;
     }
@@ -270,7 +270,7 @@ function encontrarAlunoPorId(id) {
 
 mostrarMenu();
 
-function sairDoMenu(){
-  rl.close();
-  
+function sairDoMenu() {
+    rl.close();
+
 }
