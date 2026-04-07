@@ -85,6 +85,9 @@ function mostrarMenu() {
             case "16":
                 relatorioGeral();
                 break;
+            case "17":
+                devolverCarro();
+                break;
             case "0":
                 sair();
                 break;
@@ -150,7 +153,7 @@ function fazerAluguel() {
                 }
 
                 let aluguel = {
-                    id: id,
+                    id: IdALuguel,
                     idCliente: idCliente,
                     idCarro: idCarro,
                     dias: dias,
@@ -159,7 +162,7 @@ function fazerAluguel() {
                     status: status
                 }
 
-                aluguel.total = Number(total);
+                carro.disponivel = false;
                 alugueisAtivo.push(aluguel);
 
                 aluguel.disponivel = false;
@@ -585,23 +588,23 @@ function devolverCarro() {
     rl.question("Digite o id do aluguel: ", (IDAluguel) => {
         IDAluguel = Number(IDAluguel);
 
-        if (alugueisAtivos.length === 0) {
+        if (alugueisAtivo.length === 0) {
             console.log("Nenhum aluguel ativo");
             mostrarMenu();
         }
 
-        for (i = 0; i < alugueisAtivos.length; i++) {
+        for (i = 0; i < alugueisAtivo.length; i++) {
 
-            if (alugueisAtivos[i].idAluguel === IDAluguel) {
+            if (alugueisAtivo[i].idAluguel === IDAluguel) {
 
-                let aluguel = alugueisAtivos[i];
-                let carro = encontrarCarroporID(aluguel.idCarro);
+                let aluguel = alugueisAtivo[i];
+                let carro = encontrarCarroPorId(aluguel.idCarro);
 
                 aluguel.disponivel = true;
                 carro.disponivel = true;
                 aluguel.status = "finalizado"
                 alugueisFinalizados.push(aluguel);
-                alugueisAtivos.splice(i, 1);
+                alugueisAtivo.splice(i, 1);
                 console.log("Carro devolvido");
                 mostrarMenu();
 
@@ -615,15 +618,15 @@ function devolverCarro() {
 function listarAlugueisativos() {
     console.log("Listar alugueis ativos");
     let totalAberto = 0;
-    if (alugueisAtivos.length === 0) {
+    if (alugueisAtivo.length === 0) {
         console.log("Nenhum aluguel ativo");
         mostrarMenu();
         return;
 
     }
-    for (i = 0; i < alugueisAtivos.length; i++) {
-        console.log(alugueisAtivos[i]);
-        let totalA = alugueisAtivos[i].total;
+    for (i = 0; i < alugueisAtivo.length; i++) {
+        console.log(alugueisAtivo[i]);
+        let totalA = alugueisAtivo[i].total;
         totalA = Number(totalA);
         totalAberto = totalAberto + totalA;
     }
@@ -637,274 +640,34 @@ function listarHistorico() {
     console.log("\n=== Histórico de alugueis === ");
 
     console.log("=== Alugueis ativos === ");
-    if (alugueisAtivos.length === 0) {
-        function devolverCarro() {
-            console.log("Devolver carro ");
-            rl.question("Digite o id do aluguel: ", (IDAluguel) => {
-                IDAluguel = Number(IDAluguel);
+    if (alugueisAtivo.length === 0) {
 
-                if (alugueisAtivos.length === 0) {
-                    console.log("Nenhum aluguel ativo");
-                    mostrarMenu();
-                }
-
-                for (i = 0; i < alugueisAtivos.length; i++) {
-
-                    if (alugueisAtivos[i].idAluguel === IDAluguel) {
-
-                        let aluguel = alugueisAtivos[i];
-                        let carro = encontrarCarroporID(aluguel.idCarro);
-
-                        aluguel.disponivel = true;
-                        carro.disponivel = true;
-                        aluguel.status = "finalizado"
-                        alugueisFinalizados.push(aluguel);
-                        alugueisAtivos.splice(i, 1);
-                        console.log("Carro devolvido");
-                        mostrarMenu();
-
-                    }
-                }
-
-            })
-
-        }
-
-        function listarAlugueisativos() {
-            console.log("Listar alugueis ativos");
-            let totalAberto = 0;
-            if (alugueisAtivos.length === 0) {
-                console.log("Nenhum aluguel ativo");
-                mostrarMenu();
-                return;
-
-            } function devolverCarro() {
-                console.log("Devolver carro ");
-                rl.question("Digite o id do aluguel: ", (IDAluguel) => {
-                    IDAluguel = Number(IDAluguel);
-
-                    if (alugueisAtivos.length === 0) {
-                        console.log("Nenhum aluguel ativo");
-                        mostrarMenu();
-                    }
-
-                    for (i = 0; i < alugueisAtivos.length; i++) {
-
-                        if (alugueisAtivos[i].idAluguel === IDAluguel) {
-
-                            let aluguel = alugueisAtivos[i];
-                            let carro = encontrarCarroporID(aluguel.idCarro);
-
-                            aluguel.disponivel = true;
-                            carro.disponivel = true;
-                            aluguel.status = "finalizado"
-                            alugueisFinalizados.push(aluguel);
-                            alugueisAtivos.splice(i, 1);
-                            console.log("Carro devolvido");
-                            mostrarMenu();
-
-                        }
-                    }
-
-                })
-
-            }
-
-            function listarAlugueisativos() {
-                console.log("Listar alugueis ativos");
-                let totalAberto = 0;
-                if (alugueisAtivos.length === 0) {
-                    console.log("Nenhum aluguel ativo");
-                    mostrarMenu();
-                    return;
-
-                }
-                for (i = 0; i < alugueisAtivos.length; i++) {
-                    console.log(alugueisAtivos[i]);
-                    let totalA = alugueisAtivos[i].total;
-                    totalA = Number(totalA);
-                    totalAberto = totalAberto + totalA;
-                }
-                console.log("Valor total em aberto: ", totalAberto);
-
-                mostrarMenu();
-
-            }
-
-            function listarHistorico() {
-                console.log("\n=== Histórico de alugueis === ");
-
-                console.log("=== Alugueis ativos === ");
-                if (alugueisAtivos.length === 0) {
-                    console.log("Nenhum aluguel ativo\n");
-                }
-
-                else {
-                    for (i = 0; i < alugueisAtivos.length; i++) {
-                        console.log(alugueisAtivos[i]);
-
-                    }
-
-                }
-                console.log("=====================");
-                console.log("=== Alugueis finalizados ===");
-
-                if (alugueisFinalizados.length === 0) {
-                    console.log("Nenhum aluguel finalizado");
-
-                }
-
-                else {
-                    for (i = 0; i < alugueisFinalizados.length; i++) {
-                        console.log(alugueisFinalizados[i]);
-
-                    }
-                }
-                mostrarMenu();
-
-            }
-            function relatorioGeral() {
-                console.log("Relatório geral");
-                let totalFechado = 0;
-
-                console.log(carros);
-                console.log(clientes);
-                console.log("=== Alugueis ativos ===");
-                console.log(alugueisAtivos);
-                console.log("=== Alugueis finalizados === ");
-                console.log(alugueisFinalizados);
-
-                for (i = 0; i < alugueisFinalizados.length; i++) {
-                    let totalb = alugueisFinalizados[i].total;
-                    totalb = Number(totalb);
-                    totalFechado = totalb + totalFechado;
-
-                }
-                console.log("Faturamento: ", totalFechado);
-                mostrarMenu();
-
-            }
-
-            function sair() {
-                rl.close();
-            }
-
-
-        }
-
-        function listarHistorico() {
-            console.log("\n=== Histórico de alugueis === ");
-
-            console.log("=== Alugueis ativos === ");
-            if (alugueisAtivos.length === 0) {
-                console.log("Nenhum aluguel ativo\n");
-            }
-
-            else {
-                for (i = 0; i < alugueisAtivos.length; i++) {
-                    console.log(alugueisAtivos[i]);
-
-                }
-
-            }
-            console.log("=====================");
-            console.log("=== Alugueis finalizados ===");
-
-            if (alugueisFinalizados.length === 0) {
-                console.log("Nenhum aluguel finalizado");
-
-            }
-
-            else {
-                for (i = 0; i < alugueisFinalizados.length; i++) {
-                    console.log(alugueisFinalizados[i]);
-
-                }
-            }
+        if (alugueisAtivo.length === 0) {
+            console.log("Nenhum aluguel ativo");
             mostrarMenu();
-
         }
-        function relatorioGeral() {
-            console.log("Relatório geral");
-            let totalFechado = 0;
 
-            console.log(carros);
-            console.log(clientes);
-            console.log("=== Alugueis ativos ===");
-            console.log(alugueisAtivos);
-            console.log("=== Alugueis finalizados === ");
-            console.log(alugueisFinalizados);
+        for (i = 0; i < alugueisAtivo.length; i++) {
 
-            for (i = 0; i < alugueisFinalizados.length; i++) {
-                let totalb = alugueisFinalizados[i].total;
-                totalb = Number(totalb);
-                totalFechado = totalb + totalFechado;
+            if (alugueisAtivo[i].idAluguel === IDAluguel) {
+
+                let aluguel = alugueisAtivo[i];
+                let carro = encontrarCarroPorId(aluguel.idCarro);
+
+                aluguel.disponivel = true;
+                carro.disponivel = true;
+                aluguel.status = "finalizado"
+                alugueisFinalizados.push(aluguel);
+                alugueisAtivo.splice(i, 1);
+                console.log("Carro devolvido");
+                mostrarMenu();
 
             }
-            console.log("Faturamento: ", totalFechado);
-            mostrarMenu();
-
-        }
-
-        function sair() {
-            rl.close();
-        }
-
-
-    }
-
-    else {
-        for (i = 0; i < alugueisAtivos.length; i++) {
-            console.log(alugueisAtivos[i]);
-
         }
 
     }
-    console.log("=====================");
-    console.log("=== Alugueis finalizados ===");
-
-    if (alugueisFinalizados.length === 0) {
-        console.log("Nenhum aluguel finalizado");
-
-    }
-
-    else {
-        for (i = 0; i < alugueisFinalizados.length; i++) {
-            console.log(alugueisFinalizados[i]);
-
-        }
-    }
-    mostrarMenu();
 
 }
-function relatorioGeral() {
-    console.log("Relatório geral");
-    let totalFechado = 0;
-
-    console.log(carros);
-    console.log(clientes);
-    console.log("=== Alugueis ativos ===");
-    console.log(alugueisAtivos);
-    console.log("=== Alugueis finalizados === ");
-    console.log(alugueisFinalizados);
-
-    for (i = 0; i < alugueisFinalizados.length; i++) {
-        let totalb = alugueisFinalizados[i].total;
-        totalb = Number(totalb);
-        totalFechado = totalb + totalFechado;
-
-    }
-    console.log("Faturamento: ", totalFechado);
-    mostrarMenu();
-
-}
-
-function sair() {
-    rl.close();
-}
-
-
-
 
 
 mostrarMenu();
